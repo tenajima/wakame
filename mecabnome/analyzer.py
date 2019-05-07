@@ -64,7 +64,7 @@ class Analyzer:
                 ダンダーで区切った中間カラムの文字列
             """
             splits = text.split(',')
-            return ','.join(splits[:-3]) + '__' + splits[-3]
+            return ','.join(splits[:-3]) + ',__' + splits[-3]
 
         # mecabを用いてパースする
         chunk: str = self.tokenizer.parse(text)
@@ -95,7 +95,7 @@ class Analyzer:
 
         # 品詞とbase_formの作成
         tokens['part_of_speech'] = tokens['tmp'].map(
-            lambda feat: feat.split('__')[0])
+            lambda feat: re.sub(r'[\*]+,', '', feat.split('__')[0]))
         tokens['base_form'] = tokens['tmp'].map(
             lambda feat: feat.split('__')[1])
 
