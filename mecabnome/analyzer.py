@@ -82,7 +82,7 @@ class Analyzer:
 
             tokens.append([surface, feature])
         if pass_count:
-            logger.info('pass count is: ', pass_count)
+            logger.info(f'pass count is: {pass_count}')
 
         # pd.DataFrameとする
         tokens = pd.DataFrame(tokens, columns=['surface', 'feature'])
