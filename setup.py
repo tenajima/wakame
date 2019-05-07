@@ -11,7 +11,7 @@ setup(
         'mecab-python3',
     ],
     classifiers=[
-        "Programming Language :: Python :: 3.6.7",
+        "Programming Language :: Python :: 3.6",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ]
