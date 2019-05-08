@@ -43,13 +43,13 @@ cd mecab-ipadic-neologd
 ```
 詳しくは[こちらを参照してください](https://github.com/neologd/mecab-ipadic-neologd/blob/master/README.ja.md)
 
-### mecab-python3のインストール
+### mecab-python3のインストール(必須)
 ```sh
 brew install swig
 pip install mecab-python3
 ```
 
-## wakameのインストール
+## wakameのインストール(必須)
 
 ```sh
 pip install wakame

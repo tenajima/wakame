@@ -15,10 +15,11 @@ setup(
     ],
     description='janomeライクなインターフェイスを提供するmecabのラッパーです.',
     long_description=long_description,
+    long_description_content_type="text/markdown",
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
-        "Operating System :: Mac OS X",
+        'Operating System :: MacOS :: MacOS X',
     ]
 )
