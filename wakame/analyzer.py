@@ -19,7 +19,7 @@ class Analyzer:
         token_filters : list, optional
             TokenFilters list, by default []
         use_neologd : boolean, by default False
-            use Neologd dictionary or not
+             NEologdの辞書を使うかどうか
         """
 
         # get neologd
@@ -40,6 +40,19 @@ class Analyzer:
         self.token_filters = token_filters
 
     def analyze(self, text: str):
+        """品詞に分解するメソッド.
+        
+        Parameters
+        ----------
+        text : str
+            解析する文字列
+        
+        Returns
+        -------
+        pd.DataFrame
+            解析結果
+            surface, part_of_speech, base_formのカラムを持ったDataFrameに分解する.
+        """
         for cfilter in self.char_filters:
             text = cfilter.filter(text)
 
