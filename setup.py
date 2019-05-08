@@ -1,4 +1,7 @@
-from setuptools import setup
+from setuptools import setup, find_packages
+
+with open("README.md", "r") as fh:
+    long_description = fh.read()
 
 setup(
     name='wakame',
@@ -10,8 +13,11 @@ setup(
         'pandas',
         'mecab-python3',
     ],
+    description='janomeライクなインターフェイスを提供するmecabのラッパーです.',
+    long_description=long_description,
+    packages=find_packages(),
     classifiers=[
-        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: Mac OS X",
     ]
