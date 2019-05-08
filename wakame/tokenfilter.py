@@ -21,9 +21,10 @@ class POSKeepFilter(TokenFilter):
         """
         self.pos_list = pos_list
 
-    def apply(self, tokens: pd.DataFrame):
-        return tokens[tokens['part_of_speech'].str.match(
-            f"({'|'.join(self.pos_list)})")]
+    def apply(self, tokens):
+        for token in tokens:
+            if any(token.part_of_speech.startswith(pos) for pos in self.pos_list):
+                yield token
 
 
 class POSStopFilter(TokenFilter):
@@ -38,6 +39,8 @@ class POSStopFilter(TokenFilter):
         """
         self.pos_list = pos_list
 
-    def apply(self, tokens: pd.DataFrame):
-        return tokens[~tokens['part_of_speech'].str.
-                      match(f"({'|'.join(self.pos_list)})")]
+    def apply(self, tokens):
+        for token in tokens:
+            if any(token.part_of_speech.startswith(pos) for pos in self.pos_list):
+                continue
+            yield token
