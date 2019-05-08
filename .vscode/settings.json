@@ -1,5 +1,4 @@
 {
-    // "python.pythonPath": "~/python-env/mecab-no-me/bin/python",
     "python.pythonPath": "~/python-env/deep-learning/bin/python",
     "python.formatting.provider": "yapf",
     "autoDocstring.docstringFormat": "numpy",

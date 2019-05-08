@@ -1,11 +1,11 @@
 from setuptools import setup
 
 setup(
-    name='mecabnome',
+    name='wakame',
     version='0.1.0',
-    author='Yuto Mizutani',
+    author='tenajima',
     author_email='tenajima@gmail.com',
-    url='',
+    url='https://github.com/tenajima/wakame',
     install_requires=[
         'pandas',
         'mecab-python3',
@@ -13,6 +13,6 @@ setup(
     classifiers=[
         "Programming Language :: Python :: 3.6",
         "License :: OSI Approved :: MIT License",
-        "Operating System :: OS Independent",
+        "Operating System :: Mac OS X",
     ]
 )
