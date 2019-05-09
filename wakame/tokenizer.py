@@ -4,9 +4,10 @@ import subprocess
 
 import MeCab
 
+
 class Token:
     """
-    A Token object contains all information for a token.
+    tokenの情報を内包するクラス
     """
 
     def __init__(self, word_with_feat: str):
@@ -41,7 +42,18 @@ class Token:
 
 
 class Tokenizer:
+    """
+    textの品詞分解を司るクラス
+    """
+
     def __init__(self, use_neologd=False):
+        """mecabを使えるようにする
+        
+        Parameters
+        ----------
+        use_neologd : bool, optional
+            NEologdを使うかどうかを指定する, by default False
+        """
         # get neologd
         cmd = 'echo `mecab-config --dicdir`'
         if use_neologd:
@@ -56,12 +68,24 @@ class Tokenizer:
         dict_path = re.sub(r'\n', '', dict_path)
 
         self.tokenizer = MeCab.Tagger('-d ' + dict_path)
-    
+
     def tokenize(self, text, wakati=False):
+        """トークン化する
+        
+        Parameters
+        ----------
+        text : str
+            品詞分解する対象のtext
+        wakati : bool, optional
+            Trueにするとsurface部分のみをリストで返すようにする, by default False
+        
+        Returns
+        -------
+        トークンのリスト(wakati=False),もしくは文字列のリスト(wakati=True)
+        """
         chunk: str = self.tokenizer.parse(text).split('\n')[:-2]
         if wakati:
             tokens = [Token(ch).surface for ch in chunk]
         else:
             tokens = [Token(ch) for ch in chunk]
         return tokens
-        
