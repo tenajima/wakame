@@ -39,10 +39,12 @@ class Analyzer:
         
         Returns
         -------
-        pd.DataFrame
-            解析結果
-            surface, part_of_speech, base_formのカラムを持ったDataFrameに分解する.
+        トークンのジェネレーター
         """
+
+        if not text:
+            logger.info('text is empty!')
+            return
         for cfilter in self.char_filters:
             text = cfilter.filter(text)
 
@@ -51,3 +53,28 @@ class Analyzer:
             tokens = tfilter.filter(tokens)
 
         return tokens
+
+    def analyze_with_dataframe(self, text: str):
+        """品詞分解したものをpd.DataFrameで返すメソッド
+        
+        Parameters
+        ----------
+        text : str
+            解析する文字列
+        
+        Returns
+        -------
+        pd.DataFrame
+        """
+        if not text:
+            logger.info('text is empty!')
+            return
+
+        tokens = list(self.analyze(text))
+        columns = list(tokens[0].__dict__.keys())
+
+        dataframe = {}
+        for col in columns:
+            dataframe[col] = [getattr(token, col) for token in tokens]
+
+        return pd.DataFrame(dataframe)
