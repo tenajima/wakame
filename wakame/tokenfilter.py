@@ -1,4 +1,10 @@
+import logging
+from typing import List
 import pandas as pd
+
+from .tokenizer import Token
+
+logger = logging.getLogger(__name__)
 
 
 class TokenFilter:
@@ -23,7 +29,9 @@ class POSKeepFilter(TokenFilter):
 
     def apply(self, tokens):
         for token in tokens:
-            if any(token.part_of_speech.startswith(pos) for pos in self.pos_list):
+            if any(
+                    token.part_of_speech.startswith(pos)
+                    for pos in self.pos_list):
                 yield token
 
 
@@ -41,6 +49,27 @@ class POSStopFilter(TokenFilter):
 
     def apply(self, tokens):
         for token in tokens:
-            if any(token.part_of_speech.startswith(pos) for pos in self.pos_list):
+            if any(
+                    token.part_of_speech.startswith(pos)
+                    for pos in self.pos_list):
                 continue
+            yield token
+
+
+class POSReplaceFilter(TokenFilter):
+    """ 特定の品詞の単語を指定した文字列に変換する """
+
+    def __init__(self, pos_list, repl):
+        self.pos_list = pos_list
+        self.replacement = repl
+
+    def apply(self, tokens: List[Token]):
+        for token in tokens:
+            if any(
+                    token.part_of_speech.startswith(pos)
+                    for pos in self.pos_list):
+                token.surface = self.replacement
+                token.base_form = self.replacement
+                token.reading = self.replacement
+                token.phonetic = self.replacement
             yield token
