@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='wakame',
-    version='0.1.0',
+    version='0.1.1',
     author='tenajima',
     author_email='tenajima@gmail.com',
     url='https://github.com/tenajima/wakame',
@@ -21,6 +21,6 @@ setup(
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: MacOS :: MacOS X",
-        "Development Status :: 2 - Pre-Alpha"
+        "Development Status :: 3 - Alpha"
     ]
 )
