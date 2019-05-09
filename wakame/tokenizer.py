@@ -12,8 +12,20 @@ class Token:
 
     def __init__(self, word_with_feat: str):
         surface, feature = word_with_feat.split('\t')
-        (part_of_speech, infl_type, infl_form, base_form, reading,
-         phonetic) = feature.rsplit(',', 5)
+
+        # mecabの仕様で,アルファベットの単語は原型が'*'になり,
+        # 読みと発音が省略されるためその対応として以下のように行う.
+        split_feature = feature.split(',')
+        if len(split_feature) == 7:
+            part_of_speech = ','.join(split_feature[:4])
+            infl_type = split_feature[4]
+            infl_form = split_feature[5]
+            base_form = surface
+            reading = '*'
+            phonetic = '*'
+        else:
+            (part_of_speech, infl_type, infl_form, base_form, reading,
+             phonetic) = feature.rsplit(',', 5)
 
         self.surface = surface
         """surface form (表層形)"""
