@@ -10,6 +10,15 @@ class CharFilter:
 
 class RegexReplaceCharFilter(CharFilter):
     def __init__(self, pat, repl):
+        """正規表現に一致する部分を置き換える.
+        
+        Parameters
+        ----------
+        pat : str
+            文字列型の正規表現.
+        repl : str
+            置き換える文字列.
+        """
         self. pattern = re.compile(pat)
         self.replacement = repl
     

@@ -5,25 +5,42 @@ janomeライクなインターフェイスを提供するmecabのラッパーで
 
 ```python
 import MeCab
+from wakame.tokenizer import Tokenizer
 from wakame.analyzer import Analyzer
 from wakame.charfilter import *
 from wakame.tokenfilter import *
 
 text = '和布ちゃんこんにちは'
+
 # 基本的な使い方
-analyzer = Analyzer()
-tokens = analyzer.analyze(text)
+tokenizer = Tokenizer()
+tokens = tokenizer.tokenize(text)
+for token in tokens:
+    print(token)
+
+# 分かち書き
+tokens = tokenizer.tokenize(text, wakati=True)
+print(tokens)
 
 # 辞書をNEologdにする場合
-analyzer = Analyzer(use_neologd=True)
-tokens = analyzer.analyze(text)
+tokenizer = Tokenizer(use_neologd=True)
+tokens = tokenizer.tokenize(text)
+for token in tokens:
+    print(token)
 
 # filterを利用する場合
 char_filters = [RegexReplaceCharFilter('和布', 'wakame')]
 token_filters = [POSKeepFilter('名詞'), POSStopFilter(['名詞,接尾'])]
-analyzer = Analyzer(char_filters=char_filters, token_filters=token_filters)
+analyzer = Analyzer(tokenizer, char_filters=char_filters, token_filters=token_filters)
 tokens = analyzer.analyze(text)
+for token in tokens:
+    print(token)
 
+# tokenの情報をDataFrameで用いる場合
+tokenizer = Tokenizer()
+analyzer = Analyzer(tokenizer)
+df = analyzer.analyze_with_dataframe(text)
+print(df)`
 ```
 
 ## インストール
