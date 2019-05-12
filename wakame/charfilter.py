@@ -12,7 +12,7 @@ class CharFilter:
 class RegexReplaceCharFilter(CharFilter):
     def __init__(self, pat, repl):
         """正規表現に一致する部分を置き換える.
-        
+
         Parameters
         ----------
         pat : str
@@ -28,7 +28,8 @@ class RegexReplaceCharFilter(CharFilter):
 
 
 class URLReplaceFilter(RegexReplaceCharFilter):
-    def __init__(self, repl=''):
+    def __init__(self, repl=""):
         self.pattern = re.compile(
-            r'(https?|ftp)(:\/\/[-_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+\$,%#]+)')
+            r"(https?|ftp)(:\/\/[-_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+\$,%#]+)"
+        )
         self.replacement = repl

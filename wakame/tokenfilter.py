@@ -1,6 +1,5 @@
 import logging
 from typing import List
-import pandas as pd
 
 from .tokenizer import Token
 
@@ -29,9 +28,7 @@ class POSKeepFilter(TokenFilter):
 
     def apply(self, tokens):
         for token in tokens:
-            if any(
-                    token.part_of_speech.startswith(pos)
-                    for pos in self.pos_list):
+            if any(token.part_of_speech.startswith(pos) for pos in self.pos_list):
                 yield token
 
 
@@ -49,9 +46,7 @@ class POSStopFilter(TokenFilter):
 
     def apply(self, tokens):
         for token in tokens:
-            if any(
-                    token.part_of_speech.startswith(pos)
-                    for pos in self.pos_list):
+            if any(token.part_of_speech.startswith(pos) for pos in self.pos_list):
                 continue
             yield token
 
@@ -65,9 +60,7 @@ class POSReplaceFilter(TokenFilter):
 
     def apply(self, tokens: List[Token]):
         for token in tokens:
-            if any(
-                    token.part_of_speech.startswith(pos)
-                    for pos in self.pos_list):
+            if any(token.part_of_speech.startswith(pos) for pos in self.pos_list):
                 token.surface = self.replacement
                 token.base_form = self.replacement
                 token.reading = self.replacement
