@@ -1,4 +1,5 @@
 import re
+import unicodedata
 
 
 class CharFilter:
@@ -27,7 +28,27 @@ class RegexReplaceCharFilter(CharFilter):
         return re.sub(self.pattern, self.replacement, text)
 
 
+class UnicodeNormalizeCharFilter(CharFilter):
+    """
+    ユニコード文字列の正規化を行うフィルター
+    """
+
+    def __init__(self, form="NFKC"):
+        """
+
+        Parameters
+        ----------
+        form : str, optional
+            正規化の形式. 'NFC', 'NFKC, 'NFD'のどれかを選ぶこと. by default 'NFKC'
+        """
+        self.form = form
+
+    def apply(self, text):
+        return unicodedata.normalize(self.form, text)
+
+
 class URLReplaceFilter(RegexReplaceCharFilter):
+    """ URLを指定された文字列に変換するフィルター """
     def __init__(self, repl=""):
         self.pattern = re.compile(
             r"(https?|ftp)(:\/\/[-_\.!~*\'()a-zA-Z0-9;\/?:\@&=\+\$,%#]+)"
