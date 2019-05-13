@@ -2,6 +2,9 @@
 
 ## Version 0.2.0
 
+- RestoreFilterの実装
+- janomeで実装してある各種フィルターの実装
+
 > 2019/05/13
 
 ## Version 0.1.2
