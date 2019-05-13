@@ -40,7 +40,7 @@ for token in tokens:
 tokenizer = Tokenizer()
 analyzer = Analyzer(tokenizer)
 df = analyzer.analyze_with_dataframe(text)
-print(df)`
+print(df)
 ```
 
 ## インストール
