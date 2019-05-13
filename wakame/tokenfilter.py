@@ -62,7 +62,15 @@ class POSReplaceFilter(TokenFilter):
         for token in tokens:
             if any(token.part_of_speech.startswith(pos) for pos in self.pos_list):
                 token.surface = self.replacement
-                token.base_form = self.replacement
-                token.reading = self.replacement
-                token.phonetic = self.replacement
+            yield token
+
+
+class RestoreFilter(TokenFilter):
+    def __init__(self, surface_list):
+        self.surface_list = surface_list
+
+    def apply(self, tokens: List[Token]):
+        for token in tokens:
+            if any(token.cache == surface for surface in self.surface_list):
+                token.surface = token.cache
             yield token
