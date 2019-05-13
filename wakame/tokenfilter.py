@@ -14,6 +14,30 @@ class TokenFilter:
         raise NotImplementedError
 
 
+class LowerCaseFilter(TokenFilter):
+    """
+    surfaceとbase_forとを小文字に変換する.
+    """
+
+    def apply(self, tokens):
+        for token in tokens:
+            token.surface = token.surface.lower()
+            token.base_form = token.base_form.lower()
+            yield token
+
+
+class UpperCaseFilter(TokenFilter):
+    """
+    surfaceとbase_formとを大文字に変換する.
+    """
+
+    def apply(self, tokens):
+        for token in tokens:
+            token.surface = token.surface.upper()
+            token.base_form = token.base_form.upper()
+            yield token
+
+
 class POSKeepFilter(TokenFilter):
     """ 指定された品詞を残すフィルター """
 
@@ -66,6 +90,8 @@ class POSReplaceFilter(TokenFilter):
 
 
 class RestoreFilter(TokenFilter):
+    """ 変換されたsurfaceをもとに戻すフィルター """
+
     def __init__(self, surface_list):
         self.surface_list = surface_list
 
