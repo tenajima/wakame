@@ -47,6 +47,9 @@ class Token:
         self.phonetic = phonetic
         """pronounce (発音)"""
 
+        # もとのsurfaceを残しておくもの
+        self.cache = surface
+
     def __str__(self):
         return "%s\t%s,%s,%s,%s,%s,%s" % (
             self.surface,
