@@ -1,4 +1,5 @@
 # wakame
+
 janomeライクなインターフェイスを提供するmecabのラッパーです.
 
 ## 利用方法
@@ -40,27 +41,31 @@ for token in tokens:
 tokenizer = Tokenizer()
 analyzer = Analyzer(tokenizer)
 df = analyzer.analyze_with_dataframe(text)
-print(df)`
+print(df)
 ```
 
 ## インストール
 
 ### MeCabのインストール(必須)
+
 ```sh
 brew install mecab
 brew install mecab-ipadic
 ```
 
 ### mecab-ipadic-NEologdのインストール(任意)
+
 ```sh
 brew install git curl xz
 git clone --depth 1 git@github.com:neologd/mecab-ipadic-neologd.git
 cd mecab-ipadic-neologd
 ./bin/install-mecab-ipadic-neologd -n
 ```
+
 詳しくは[こちらを参照してください](https://github.com/neologd/mecab-ipadic-neologd/blob/master/README.ja.md)
 
 ### mecab-python3のインストール(必須)
+
 ```sh
 brew install swig
 pip install mecab-python3
