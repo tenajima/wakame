@@ -1,3 +1,4 @@
+from typing import Union, List
 import re
 import subprocess
 
@@ -92,7 +93,7 @@ class Tokenizer:
 
         self.tokenizer = MeCab.Tagger("-d " + dict_path)
 
-    def tokenize(self, text, wakati=False):
+    def tokenize(self, text, wakati=False) -> Union[List[Token]]:
         """トークン化する
 
         Parameters

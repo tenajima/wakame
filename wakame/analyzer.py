@@ -1,8 +1,9 @@
 import logging
+from typing import List
 
 import pandas as pd
 
-from .tokenizer import Tokenizer
+from .tokenizer import Tokenizer, Token
 
 logger = logging.getLogger(__name__)
 
@@ -25,13 +26,15 @@ class Analyzer:
         self.char_filters = char_filters
         self.token_filters = token_filters
 
-    def analyze(self, text: str):
+    def analyze(self, text: str, wakati: bool = False):
         """品詞に分解するメソッド.
 
         Parameters
         ----------
         text : str
             解析する文字列
+        wakati: bool, optional
+            Trueにするとsurface部分のみをリストで返すようにする
 
         Returns
         -------
@@ -44,9 +47,12 @@ class Analyzer:
         for cfilter in self.char_filters:
             text = cfilter.filter(text)
 
-        tokens = self.tokenizer.tokenize(text)
+        tokens: List[Token] = self.tokenizer.tokenize(text)
         for tfilter in self.token_filters:
             tokens = tfilter.filter(tokens)
+
+        if wakati:
+            return [token.surface for token in tokens]
 
         return tokens
 
@@ -66,7 +72,7 @@ class Analyzer:
             logger.info("text is empty!")
             return
 
-        tokens = list(self.analyze(text))
+        tokens: List[Token] = list(self.analyze(text))
         try:
             columns = list(tokens[0].__dict__.keys())
         except IndexError:

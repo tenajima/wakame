@@ -1,5 +1,12 @@
 # 変更履歴
 
+## Version 0.2.2
+
+- Analyzerのanalyzeメソッドでwakatiできるようにしました.
+- Pyrightを導入しました.
+
+> 2019/10/03
+
 ## Version 0.2.1
 
 - analyze_with_dataframeメソッドで, 何も返さない場合のIndexErrorを修正しました.
