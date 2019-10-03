@@ -67,10 +67,23 @@ class Analyzer:
             return
 
         tokens = list(self.analyze(text))
-        columns = list(tokens[0].__dict__.keys())
+        try:
+            columns = list(tokens[0].__dict__.keys())
+        except IndexError:
+            columns = [
+                "surface",
+                "part_of_speech",
+                "infl_type",
+                "infl_form",
+                "base_form",
+                "reading",
+                "phonetic",
+            ]
+            return pd.DataFrame(columns=columns)
 
         dataframe = {}
         for col in columns:
-            dataframe[col] = [getattr(token, col) for token in tokens]
+            if col != "cache":
+                dataframe[col] = [getattr(token, col) for token in tokens]
 
         return pd.DataFrame(dataframe)

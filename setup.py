@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="wakame",
-    version="0.2.0",
+    version="0.2.1",
     author="tenajima",
     author_email="tenajima@gmail.com",
     url="https://github.com/tenajima/wakame",

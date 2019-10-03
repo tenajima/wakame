@@ -1,5 +1,12 @@
 # 変更履歴
 
+## Version 0.2.1
+
+- analyze_with_dataframeメソッドで, 何も返さない場合のIndexErrorを修正しました.
+- dataframeで `cache` というカラムも含まれているのを修正しました.
+
+> 2019/05/27
+
 ## Version 0.2.0
 
 - RestoreFilterの実装
