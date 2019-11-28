@@ -1,5 +1,9 @@
 # 変更履歴
 
+## Version 0.3.0
+
+- Add Compound Noun Filter
+
 ## Version 0.2.2
 
 - Analyzerのanalyzeメソッドでwakatiできるようにしました.

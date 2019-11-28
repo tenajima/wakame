@@ -5,12 +5,12 @@ with open("README.md", "r") as fh:
 
 setup(
     name="wakame",
-    version="0.2.2",
+    version="0.3.0",
     author="tenajima",
     author_email="tenajima@gmail.com",
     url="https://github.com/tenajima/wakame",
     install_requires=["pandas", "mecab-python3"],
-    description="janomeライクなインターフェイスを提供するmecabのラッパーです.",
+    description="Wrapper of `mecab`, which provide interface like `janome`.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     packages=find_packages(),
