@@ -100,3 +100,28 @@ class RestoreFilter(TokenFilter):
             if any(token.cache == surface for surface in self.surface_list):
                 token.surface = token.cache
             yield token
+
+
+class CompoundNounFilter(TokenFilter):
+    """ 連続した名詞を複合名詞としてひとつにするフィルター(このフィルターは最初に入れなきゃいけない) """
+
+    def apply(self, tokens):
+        _ret = None
+        for token in tokens:
+            if _ret:
+                if token.part_of_speech.startswith(
+                    "名詞"
+                ) and _ret.part_of_speech.startswith("名詞"):
+                    _ret.surface += token.surface
+                    _ret.part_of_speech = "名詞,複合,*,*"
+                    _ret.base_form += token.base_form
+                    _ret.reading += token.reading
+                    _ret.phonetic += token.phonetic
+                else:
+                    ret = _ret
+                    _ret = token
+                    yield ret
+            else:
+                _ret = token
+        if _ret:
+            yield _ret
