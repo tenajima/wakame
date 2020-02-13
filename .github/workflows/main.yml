@@ -16,8 +16,12 @@ jobs:
     - name: Install poetry and dependencies
       run: |
         curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+        echo 'export PATH="$HOME/.poetry/bin:$PATH"' >> ~/.bashrc
+        source ~/.bashrc
+        echo $PATH
         poetry install
     - name: Run test
       run: |
          run:|
+           poetry shell
            pytest
